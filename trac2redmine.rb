@@ -49,15 +49,17 @@ text = text.gsub(/([^!]|^)(^| )([A-Z][a-z]+[A-Z][a-zA-Z]+)/, '\\1\\2[[\3]]')
 text = text.gsub(/(^| )!([A-Z][A-Za-z]+)/, '\1\2')
 # Revisions links
 text = text.gsub(/\[(\d+)\]/, 'r\1')
+
 # Ticket number re-writing
-text = text.gsub(/#(\d+)/) do |s|
-  if $1.length < 10
+#text = text.gsub(/#(\d+)/) do |s|
+#  if $1.length < 10
 #            TICKET_MAP[$1.to_i] ||= $1
-    "\##{TICKET_MAP[$1.to_i] || $1}"
-  else
-    s
-  end
-end
+#    "\##{TICKET_MAP[$1.to_i] || $1}"
+#  else
+#    s
+#  end
+#end
+
 # We would like to convert the Code highlighting too
 # This will go into the next line.
 shebang_line = false

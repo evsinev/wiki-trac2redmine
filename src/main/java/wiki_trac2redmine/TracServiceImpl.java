@@ -49,7 +49,7 @@ public class TracServiceImpl implements ITracService {
                 int position = url.indexOf("/wiki/");
                 if(position > 0) {
                     String pageName = url.substring(position + 6);
-                    if(!pageName.contains("?") && !pageName.startsWith("Trac")) {
+                    if(!pageName.contains("?") && !pageName.startsWith("Trac") && !pageName.startsWith("Wiki")) {
                         ret.add(pageName);
                     }
                 }

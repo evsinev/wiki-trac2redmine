@@ -20,16 +20,17 @@ public class AppTest {
 
         for (String page : pages) {
 
+            // wiki in redmine can not contains dot in name
+            page = page.replace(".", "_");
+
             System.out.println("Converting " + page + " ...");
-            String tracWikiText = tracService.getWikiText(page);
-            if(!page.startsWith("1")) {
-                if(! redmineService.isPageExists(page)) {
-                    try {
-                        String redmineWikiText = redmineService.convertFromTracWikiText(tracWikiText);
-                        redmineService.createPage(page, redmineWikiText);
-                    } catch (IllegalStateException e) {
-                        System.err.println("Error converting "+page);
-                    }
+            String tracWikiText = "\n" + tracService.getWikiText(page);
+            if(! redmineService.isPageExists(page)) {
+                try {
+                    String redmineWikiText = redmineService.convertFromTracWikiText(tracWikiText);
+                    redmineService.createPage(page, redmineWikiText);
+                } catch (IllegalStateException e) {
+                    System.err.println("Error converting "+page);
                 }
             }
         }
