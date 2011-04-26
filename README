@@ -1,1 +1,6 @@
 Converts trac wiki to redmine
+
+
+
+How to use
+mvn test -Dtest=AppTest -DTRAC_URL=http://USERNAME:PASSWORD@trac.org/trac/trac.cgi -DREDMINE_PROJECT_URL=https://USERNAME:CHARPA@redmine.org/projects/PROJECT_NAME -DforkMode=never

@@ -22,9 +22,10 @@ public class AppTest {
 
             // wiki in redmine can not contains dot in name
             page = page.replace(".", "_");
+            page = page.replace("/", "_");
 
             System.out.println("Converting " + page + " ...");
-            String tracWikiText = "\n" + tracService.getWikiText(page);
+            String tracWikiText = "\n\n" + tracService.getWikiText(page);
             if(! redmineService.isPageExists(page)) {
                 try {
                     String redmineWikiText = redmineService.convertFromTracWikiText(tracWikiText);
