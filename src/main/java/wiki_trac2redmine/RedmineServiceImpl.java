@@ -4,6 +4,7 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.firefox.FirefoxProfile;
+import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class RedmineServiceImpl implements IRedmineService {
         FirefoxProfile profile = new FirefoxProfile();
         profile.setPreference("network.http.phishy-userpass-length", 255);
 
-        theDriver = new FirefoxDriver(profile);
+        theDriver = new HtmlUnitDriver(); //profile);
         theRedmineUrl = aRedmineUrl;
         loginToRedmine(aRedmineUrl);
     }
@@ -46,13 +47,15 @@ public class RedmineServiceImpl implements IRedmineService {
 
     @Override
     public void createPage(String aPageName, String aTextSource) {
-        theDriver.get(theRedmineUrl + "/wiki/"+aPageName);
+        System.out.println("aPageName = " + aPageName);
+        theDriver.get(theRedmineUrl + "/wiki/"+aPageName+"/edit");
 
         waitForId(theDriver, "footer");
 
 
         theDriver.findElement(By.id("auto_preview_box")).click();
 
+        theDriver.findElement(By.id("content_text")).clear();
         theDriver.findElement(By.id("content_text")).sendKeys(aTextSource);
 
         theDriver.findElement(By.name("commit")).click();
